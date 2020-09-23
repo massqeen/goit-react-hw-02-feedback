@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Layout from './Layout/Layout';
 import SectionTitle from './SectionTitle';
-import Button from './Button/Button';
+import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
+import Notification from './Notification';
 
 class App extends Component {
   state = {
@@ -12,12 +13,14 @@ class App extends Component {
   };
 
   countTotalFeedback() {
-    return this.state.good + this.state.neutral + this.state.bad;
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
   }
 
   countPositiveFeedbackPercentage() {
     const total = this.countTotalFeedback();
-    return +((this.state.good / total) * 100).toFixed(1);
+    const result = +((this.state.good / total) * 100).toFixed(1);
+    return total ? result : 0;
   }
 
   clickHandler = (feedbackType) => {
@@ -27,23 +30,29 @@ class App extends Component {
   };
 
   render() {
+    const options = Object.keys(this.state).map(
+      (key) => key[0].toUpperCase() + key.slice(1)
+    );
+    const { good, neutral, bad } = this.state;
+    const feedbackStats = (
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        total={this.countTotalFeedback()}
+        posFeedback={this.countPositiveFeedbackPercentage()}
+      />
+    );
+    const notification = <Notification message="No feedback given :(" />;
+
     return (
       <Layout>
-        <SectionTitle title="What do you think of us?" />
-        <Button title="Good" onFeedback={() => this.clickHandler('good')} />
-        <Button
-          title="Neutral"
-          onFeedback={() => this.clickHandler('neutral')}
-        />
-        <Button title="Bad" onFeedback={() => this.clickHandler('bad')} />
-        <SectionTitle title="Statistics" />
-        <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.countTotalFeedback()}
-          posFeedback={this.countPositiveFeedbackPercentage()}
-        />
+        <SectionTitle title="What do you think of us?">
+          <FeedbackOptions options={options} onFeedback={this.clickHandler} />
+        </SectionTitle>
+        <SectionTitle title="Statistics">
+          {this.countTotalFeedback() > 0 ? feedbackStats : notification}
+        </SectionTitle>
       </Layout>
     );
   }
