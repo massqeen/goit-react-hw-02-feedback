@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button/Button';
+import shortid from 'shortid';
 
 const FeedbackOptions = ({ options, onFeedback }) => {
   return (
     <>
-      {options.map((option, i) => {
-        return <Button key={i} title={option} onFeedback={onFeedback} />;
+      {options.map((option) => {
+        return (
+          <Button
+            key={shortid.generate()}
+            title={option}
+            onFeedback={onFeedback}
+          />
+        );
       })}
     </>
   );
