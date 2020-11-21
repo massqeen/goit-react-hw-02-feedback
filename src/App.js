@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Layout from './components/Layout/Layout';
+import Layout from './components/Layout';
 import SectionTitle from './components/SectionTitle';
 import FeedbackOptions from './components/FeedbackOptions';
 import Statistics from './components/Statistics';
@@ -29,9 +29,7 @@ class App extends Component {
   };
 
   render() {
-    const options = Object.keys(this.state).map(
-      (key) => key[0].toUpperCase() + key.slice(1)
-    );
+    const options = Object.keys(this.state).map((key) => key);
     const { good, neutral, bad } = this.state;
     const feedbackStats = (
       <Statistics

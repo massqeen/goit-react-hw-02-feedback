@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button/Button';
 import shortid from 'shortid';
+import Button from './Button';
 
 const FeedbackOptions = ({ options, onFeedback }) => {
   return (
@@ -23,7 +23,7 @@ FeedbackOptions.defaultProps = {
   options: ['good', 'neutral', 'bad'],
 };
 FeedbackOptions.propTypes = {
-  options: PropTypes.array.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
   onFeedback: PropTypes.func.isRequired,
 };
 
