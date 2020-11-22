@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import Layout from './components/Layout';
 import SectionTitle from './components/SectionTitle';
 import FeedbackOptions from './components/FeedbackOptions';
