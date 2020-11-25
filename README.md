@@ -1,2 +1,2 @@
 ## React studying
-#class components, state, SyntheticEvent
+#class components, state, useState hook, SyntheticEvent
