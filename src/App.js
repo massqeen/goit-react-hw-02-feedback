@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Layout from './components/Layout';
+import Layout from './components/Layout/Layout';
 import SectionTitle from './components/SectionTitle';
 import FeedbackOptions from './components/FeedbackOptions';
 import Statistics from './components/Statistics';
