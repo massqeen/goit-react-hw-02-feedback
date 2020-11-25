@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ButtonStyled from './ButtonStyles';
 
-const Button = ({ title = 'Good', onFeedback }) => {
+const Button = ({ title, onFeedback }) => {
   return (
     <ButtonStyled type="button" onClick={() => onFeedback(title.toLowerCase())}>
       {title}

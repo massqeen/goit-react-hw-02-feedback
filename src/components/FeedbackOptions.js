@@ -7,9 +7,9 @@ const FeedbackOptions = ({
 }) => {
   return (
     <>
-      {options.map((option, i) => {
-        return <Button key={i} title={option} onFeedback={onFeedback} />;
-      })}
+      {options.map((option, i) => (
+        <Button key={i} title={option} onFeedback={onFeedback} />
+      ))}
     </>
   );
 };
