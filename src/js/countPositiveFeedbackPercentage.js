@@ -1,8 +1,5 @@
-import countTotalFeedback from './countTotalFeedback';
-
-const countPositiveFeedbackPercentage = (obj, key) => {
-  const total = countTotalFeedback(obj);
-  const result = +((obj[key] / total) * 100).toFixed(1);
+const countPositiveFeedbackPercentage = (good, total) => {
+  const result = +((good / total) * 100).toFixed(1);
   return total ? result : 0;
 };
 

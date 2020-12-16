@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 import Button from './Button/Button';
 
-const FeedbackOptions = ({
-  options = ['good', 'neutral', 'bad'],
-  onFeedback,
-}) => {
+const FeedbackOptions = ({ options, onFeedback }) => {
   return (
     <>
       {options.map((option, i) => (

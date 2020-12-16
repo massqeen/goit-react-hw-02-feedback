@@ -7,24 +7,43 @@ import Notification from './components/Notification';
 import countTotalFeedback from './js/countTotalFeedback';
 import countPositiveFeedbackPercentage from './js/countPositiveFeedbackPercentage';
 
+const FeedbackTypes = { GOOD: 'good', NEUTRAL: 'neutral', BAD: 'bad' };
+
 const App = () => {
-  const [feedback, setFeedback] = useState({ good: 0, neutral: 0, bad: 0 });
-  const feedbackTypes = Object.keys(feedback).map((key) => key);
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+  const feedbackTypes = Object.values(FeedbackTypes);
+  const feedbackValues = [good, neutral, bad];
+  const total = countTotalFeedback(feedbackValues);
 
   const increaseCounter = (feedbackType) => {
-    setFeedback((prevState) => ({
-      ...prevState,
-      [feedbackType]: prevState[feedbackType] + 1,
-    }));
+    const { GOOD, NEUTRAL, BAD } = FeedbackTypes;
+    switch (feedbackType) {
+      case GOOD: {
+        setGood((state) => state + 1);
+        break;
+      }
+      case NEUTRAL: {
+        setNeutral((state) => state + 1);
+        break;
+      }
+      case BAD: {
+        setBad((state) => state + 1);
+        break;
+      }
+      default:
+        return;
+    }
   };
 
   const feedbackStats = (
     <Statistics
-      good={feedback.good}
-      neutral={feedback.neutral}
-      bad={feedback.bad}
-      total={countTotalFeedback(feedback)}
-      posFeedback={countPositiveFeedbackPercentage(feedback, 'good')}
+      good={good}
+      neutral={neutral}
+      bad={bad}
+      total={total}
+      posFeedback={countPositiveFeedbackPercentage(good, total)}
     />
   );
   const notification = <Notification message="No feedback given :(" />;
@@ -35,7 +54,7 @@ const App = () => {
         <FeedbackOptions options={feedbackTypes} onFeedback={increaseCounter} />
       </SectionTitle>
       <SectionTitle title="Statistics">
-        {countTotalFeedback(feedback) > 0 ? feedbackStats : notification}
+        {countTotalFeedback(feedbackValues) > 0 ? feedbackStats : notification}
       </SectionTitle>
     </Layout>
   );

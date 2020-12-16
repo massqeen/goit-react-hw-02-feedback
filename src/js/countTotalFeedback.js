@@ -1,4 +1,3 @@
-const countTotalFeedback = (obj) =>
-  Object.values(obj).reduce((acc, curr) => acc + curr, 0);
+const countTotalFeedback = (valuesArr) => valuesArr.reduce((a, c) => a + c);
 
 export default countTotalFeedback;
